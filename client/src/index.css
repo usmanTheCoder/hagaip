@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: "Inter", sans-serif;
+  }
+  body {
+    background: #efefef;
+  }
+}
+
+.link {
+  @apply p-2.5 flex rounded-md gap-4 items-center md:cursor-pointer cursor-default duration-300 font-medium;
+}
+
+.active {
+  @apply bg-blue-100 text-blue-600;
+}
+
+.container {
+  @apply md:w-[calc(100vw-200px)] md:relative left-[200px] mt-10 md:mt-0 w-full p-2 md:p-5 h-screen flex flex-col md:block items-center 
+}
