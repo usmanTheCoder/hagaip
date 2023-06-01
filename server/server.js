@@ -30,7 +30,12 @@ app.use("/lekium", lekiumRouter);
 app.use("/form", formRouter);
 
 app.get("/", (req, res) => {
-  res.send("App is working");
+  try {
+    res.send("App is working");
+    
+  } catch (error) {
+    console.log(error)
+  }
 });
 
 if (process.env.NODE_ENV === "production") {
