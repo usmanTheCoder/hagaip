@@ -36,7 +36,7 @@ app.get("/", (req, res) => {
     
   } catch (error) {
     console.log("error")
-    console.log(error.msg)
+    res.status(500).json(error)
   }
 });
 
