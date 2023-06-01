@@ -39,12 +39,12 @@ app.get("/", (req, res) => {
   }
 });
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("../client/dist"));
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
-  });
-}
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static("../client/dist"));
+//   app.get("*", (req, res) => {
+//     res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+//   });
+// }
 
 mongoose.connect(process.env.MONGO_URL).then(()=> {
     app.listen(process.env.PORT, ()=>  {
