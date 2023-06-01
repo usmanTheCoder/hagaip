@@ -34,7 +34,7 @@ app.get("/", (req, res) => {
     res.send("App is working");
     
   } catch (error) {
-    console.log(error)
+    console.log(error.message)
   }
 });
 
