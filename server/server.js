@@ -8,6 +8,7 @@ import designRouter from "./routes/designRouter.js"
 import formRouter from "./routes/formRouter.js"
 import lekiumRouter from "./routes/lekiumRouter.js"
 import personalRouter from "./routes/personalRouter.js"
+import path from "path"
 
 dotenv.config()
 const app = express()
