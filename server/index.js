@@ -39,7 +39,7 @@ app.get("/", (req, res) => {
     res.status(500).json(error)
   }
 });
-
+ 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("../client/dist"));
   app.get("*", (req, res) => {
