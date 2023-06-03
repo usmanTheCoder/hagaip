@@ -12,12 +12,12 @@ import path from "path"
 
 dotenv.config()
 const app = express()
-const corsOptions = {
-  origin: process.env.CLIENT_URL,
-  credentials: true,
-  optionSuccessStatus: 200,
-};
-app.use(cors(corsOptions))
+// const corsOptions = {
+//   origin: process.env.CLIENT_URL,
+//   credentials: true,
+//   optionSuccessStatus: 200,
+// };
+app.use(cors())
 app.use(cookieParser())
 app.use(express.json({ extended: false, limit: "50mb" }));
 app.use(
