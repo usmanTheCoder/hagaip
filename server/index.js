@@ -17,12 +17,12 @@ const corsOptions = {
   credentials: true,
   optionSuccessStatus: 200,
 };
+app.use(cors(corsOptions))
 app.use(cookieParser())
 app.use(express.json({ extended: false, limit: "50mb" }));
 app.use(
   express.urlencoded({ limit: "100mb", extended: true, parameterLimit: 50000 })
 );
-app.use(cors(corsOptions))
 
 app.use('/user', userRouter)
 app.use("/design", designRouter);
@@ -39,8 +39,6 @@ app.get("/", (req, res) => {
     res.status(500).json(error)
   }
 });
-
-
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("../client/dist"));
