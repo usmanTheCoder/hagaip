@@ -11,7 +11,7 @@ import Lekium from "./pages/Lekium";
 import Activated from "./pages/Activated";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { allUsers, refreshToken } from "../toolkit/slices/authSlice";
+import { refreshToken } from "../toolkit/slices/authSlice";
 import CryptoJs from "crypto-js";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
