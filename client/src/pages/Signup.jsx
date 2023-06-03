@@ -2,13 +2,14 @@ import { Link } from "react-router-dom";
 import Logo from "../components/Logo";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setActiveAlertMsg, setAlertMsg, signup } from "../../toolkit/slices/authSlice";
+import { setActiveAlertMsg, setAlertMsg, setProgress, signup } from "../../toolkit/slices/authSlice";
 import { alertNotification } from "../components/alertNotification";
+import LoadingBar from "react-top-loading-bar";
 
 const Signup = () => {
   const dispatch = useDispatch();
   const [color, setColor] = useState("");
-  const { alertMsg, activeAlertMsg } = useSelector((state) => state.auth);
+  const { alertMsg, activeAlertMsg, progress } = useSelector((state) => state.auth);
   const [disabled, setDisabled] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
@@ -44,26 +45,34 @@ const Signup = () => {
       return;
     } else {
       setDisabled(true);
-      dispatch(signup(formData));
-      dispatch(setActiveAlertMsg(true));
-      setColor("green");
+      dispatch(setProgress(40))
+      dispatch(signup(formData)).then(()=> {
+        dispatch(setActiveAlertMsg(true));
+        setColor("green");
+        dispatch(setProgress(100))
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
+        });
+      });
       setTimeout(()=> {
         dispatch(setActiveAlertMsg(false))
         dispatch(setAlertMsg(""))
       }, 5000)
       setDisabled(false);
-      setFormData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-      });
     }
   };
 
   return (
     <>
+      <LoadingBar
+        color="#0061ff"
+        progress={progress}
+        onLoaderFinished={() => dispatch(setProgress(0))}
+      />
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm text-center">
           <Logo />
