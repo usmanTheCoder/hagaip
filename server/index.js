@@ -24,11 +24,11 @@ app.use(
   express.urlencoded({ limit: "100mb", extended: true, parameterLimit: 50000 })
 );
 
-app.use('/user', userRouter)
-app.use("/design", designRouter);
-app.use("/personal", personalRouter);
-app.use("/lekium", lekiumRouter);
-app.use("/form", formRouter);
+app.use('/api/user', userRouter)
+app.use("/api/design", designRouter);
+app.use("/api/personal", personalRouter);
+app.use("/api/lekium", lekiumRouter);
+app.use("/api/form", formRouter);
 
 app.get("/", (req, res) => {
   try {
