@@ -53,7 +53,7 @@ mongoose.connect(
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-  }
+  } 
 ).then(()=>{
   console.log("Connected to mongoDB")
   app.listen(process.env.PORT, () => {
