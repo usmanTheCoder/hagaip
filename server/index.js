@@ -49,7 +49,7 @@ if (process.env.NODE_ENV === "production") {
 
 const URI = process.env.MONGO_URL;
 mongoose.connect(
-  URI,
+  process.env.MONGO_URL,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
