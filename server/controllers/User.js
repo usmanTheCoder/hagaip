@@ -39,39 +39,48 @@ export const userCtrl = {
       );
 
       const url = `${process.env.CLIENT_URL}/user/activation/${activationToken}`;
-
-      sendEmail(email, url, "Please verify your email!");
-
-      return res.status(200).json({
-        msg: "A verification link has been sent to your email address!",
-      });
-    } catch (error) {
-      return res.status(500).json({ msg: error.message });
-    }
-  },
-  activateEmail: async (req, res) => {
-    const { activation_token } = req.body;
-    try {
-      const user = jwt.verify(
-        activation_token,
-        process.env.ACTIVATION_TOKEN_SECRET
-      );
-      const { firstName, lastName, email, phoneNumber, password } = user;
       const hashPassword = await bcrypt.hash(password, 16);
-      const newUser = await User.create({
+
+      await User.create({
         firstName,
         lastName,
         email,
         phoneNumber,
         password: hashPassword,
       });
-      return res
-        .status(200)
-        .json({ msg: "Email verified successfully!", newUser });
+
+      sendEmail(email, url, "Please verify your email!");
+
+      return res.status(200).json({
+        msg: "User Successfully Registered!",
+      });
     } catch (error) {
       return res.status(500).json({ msg: error.message });
     }
   },
+  // activateEmail: async (req, res) => {
+  //   const { activation_token } = req.body;
+  //   try {
+  //     const user = jwt.verify(
+  //       activation_token,
+  //       process.env.ACTIVATION_TOKEN_SECRET
+  //     );
+  //     const { firstName, lastName, email, phoneNumber, password } = user;
+  //     const hashPassword = await bcrypt.hash(password, 16);
+  //     const newUser = await User.create({
+  //       firstName,
+  //       lastName,
+  //       email,
+  //       phoneNumber,
+  //       password: hashPassword,
+  //     });
+  //     return res
+  //       .status(200)
+  //       .json({ msg: "Email verified successfully!", newUser });
+  //   } catch (error) {
+  //     return res.status(500).json({ msg: error.message });
+  //   }
+  // },
   login: async (req, res) => {
     const { email, password } = req.body;
     try {
